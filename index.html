@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин товаров ручной работы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo" id="secretLogin">
+                <span>🛍️</span>
+                <h1>магазинчик Валинтины</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Поиск товаров...">
+                <button onclick="searchProducts()">Найти</button>
+            </div>
+            <div class="filters">
+                <select id="categoryFilter" onchange="filterProducts()">
+                    <option value="">Все категории</option>
+                    <option value="Украшения">Украшения</option>
+                    <option value="Декор">Декор</option>
+                    <option value="Одежда">Одежда</option>
+                    <option value="Косметика">Косметика</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="products-container" id="productsContainer">
+            <!-- Карточки товаров будут здесь -->
+        </div>
+    </main>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2>Вход в админ-панель</h2>
+            <input type="text" id="adminLogin" placeholder="Логин">
+            <input type="password" id="adminPassword" placeholder="Пароль">
+            <button onclick="checkAdminLogin()">Войти</button>
+            <span class="close" onclick="closeLoginModal()">&times;</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Инициализация клиентской части
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts(products);
+            setupSecretLogin();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель - Магазин товаров ручной работы</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span>🛍️</span>
+                <h1>Панель администратора</h1>
+            </div>
+            <nav>
+                <button onclick="showSection('stats')">Статистика</button>
+                <button onclick="showSection('products')">Управление товарами</button>
+                <button onclick="logout()">Выйти</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="statsSection" class="admin-section">
+            <h2>Статистика переходов</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Всего переходов</h3>
+                    <p id="totalClicks">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Самая популярная категория</h3>
+                    <p id="popularCategory">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Самый популярный товар</h3>
+                    <p id="popularProduct">-</p>
+                </div>
+            </div>
+            
+            <div class="clicks-list">
+                <h3>История переходов</h3>
+                <table id="clicksTable">
+                    <thead>
+                        <tr>
+                            <th>Товар</th>
+                            <th>Категория</th>
+                            <th>Время перехода</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Данные о кликах будут здесь -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="productsSection" class="admin-section" style="display:none;">
+            <h2>Управление товарами</h2>
+            <button onclick="showProductModal()" class="add-product-btn">+ Добавить товар</button>
+            
+            <div class="admin-products-container" id="adminProductsContainer">
+                <!-- Карточки товаров для администрирования -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для добавления/редактирования товара -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle">Добавить товар</h2>
+            <input type="text" id="productName" placeholder="Название товара">
+            <textarea id="productDescription" placeholder="Описание товара"></textarea>
+            <input type="text" id="productPrice" placeholder="Цена">
+            <input type="text" id="productCategory" placeholder="Категория">
+            <input type="text" id="productImage" placeholder="URL изображения">
+            <input type="text" id="productLink" placeholder="Ссылка для перехода">
+            <div class="modal-buttons">
+                <button onclick="saveProduct()">Сохранить</button>
+                <button onclick="closeProductModal()" class="cancel-btn">Отмена</button>
+            </div>
+            <span class="close" onclick="closeProductModal()">&times;</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Инициализация админ-панели
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!isLoggedIn()) {
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            showSection('stats');
+            renderAdminProducts();
+            updateStats();
+        });
+    </script>
+</body>
+</html>
