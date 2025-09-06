@@ -6,7 +6,7 @@ let products = JSON.parse(localStorage.getItem('products')) || [
         description: "Теплая и стильная шапка, связанная вручную из натуральной шерсти.",
         price: "2500 руб.",
         category: "Одежда",
-        image: "https://via.placeholder.com/300x200?text=Вязаная+шапка",
+        image: "RobloxScreenShot20250411_195320965.png",
         link: "https://example.com/product1"
     },
     {
@@ -15,7 +15,7 @@ let products = JSON.parse(localStorage.getItem('products')) || [
         description: "Уникальная керамическая кружка с ручной росписью.",
         price: "1500 руб.",
         category: "Декор",
-        image: "https://via.placeholder.com/300x200?text=Керамическая+кружка",
+        image: "RobloxScreenShot20250411_195320965.png",
         link: "https://example.com/product2"
     },
     {
@@ -24,7 +24,7 @@ let products = JSON.parse(localStorage.getItem('products')) || [
         description: "Изящное серебряное кольцо с натуральным камнем.",
         price: "4200 руб.",
         category: "Украшения",
-        image: "https://via.placeholder.com/300x200?text=Серебряное+кольцо",
+        image: "RobloxScreenShot20250411_195320965.png",
         link: "https://example.com/product3"
     },
     {
@@ -33,7 +33,7 @@ let products = JSON.parse(localStorage.getItem('products')) || [
         description: "Набор из 5 кусочков мыла ручной работы с разными ароматами.",
         price: "1800 руб.",
         category: "Косметика",
-        image: "https://via.placeholder.com/300x200?text=Набор+мыла",
+        image: "RobloxScreenShot20250411_195320965.png",
         link: "https://example.com/product4"
     }
 ];
@@ -386,4 +386,5 @@ if (!localStorage.getItem('products')) {
 
 if (!localStorage.getItem('clicks')) {
     localStorage.setItem('clicks', JSON.stringify(clicks));
+
 }
