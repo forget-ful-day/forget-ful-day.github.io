@@ -2,56 +2,512 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин товаров ручной работы</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MaxStudio | Портфолио Максимилиана Зайцева</title>
+    <!-- Google Fonts & простой сброс стилей -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0c12;
+            font-family: 'Inter', sans-serif;
+            color: #eef2ff;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* контейнер */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        /* хедер и нав */
+        header {
+            padding: 28px 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(4px);
+            position: sticky;
+            top: 0;
+            background: rgba(10,12,18,0.75);
+            z-index: 10;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #A78BFA);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .logo p {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-top: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #c084fc;
+        }
+
+        /* секции */
+        section {
+            margin: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: #8b5cf6;
+            border-radius: 4px;
+        }
+
+        /* карточки проектов */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .project-card {
+            background: #11141f;
+            border-radius: 28px;
+            padding: 28px 24px;
+            transition: 0.25s ease;
+            border: 1px solid #232736;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 12px 20px -12px rgba(0,0,0,0.4);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #4c3b77;
+            box-shadow: 0 20px 28px -12px rgba(139,92,246,0.2);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .project-card h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: #1e1f2c;
+            padding: 4px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #b4c0e0;
+            margin: 12px 0 10px 0;
+        }
+
+        .project-desc {
+            color: #cbd5e6;
+            margin: 16px 0;
+            font-size: 0.95rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #2d2a3e;
+            padding: 10px 18px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            margin-top: 12px;
+            border: 1px solid #4b3f6e;
+        }
+
+        .download-btn i {
+            font-size: 1rem;
+        }
+
+        .download-btn:hover {
+            background: #6d28d9;
+            border-color: #a78bfa;
+        }
+
+        .status-badge {
+            background: #2d3748;
+            border-radius: 20px;
+            padding: 5px 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 14px;
+            color: #facc15;
+        }
+
+        /* контактная сетка */
+        .contact-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 24px;
+            justify-content: space-between;
+        }
+        .contact-methods {
+            flex: 2;
+            min-width: 240px;
+            background: #0f111a;
+            border-radius: 32px;
+            padding: 28px 24px;
+            border: 1px solid #262b3c;
+        }
+        .contact-methods h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .contact-list {
+            list-style: none;
+        }
+        .contact-list li {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            word-break: break-all;
+        }
+        .contact-list i {
+            width: 32px;
+            font-size: 1.3rem;
+            color: #a78bfa;
+        }
+        .contact-list a {
+            color: #e2e8f0;
+            text-decoration: none;
+            border-bottom: 1px dashed #4b5563;
+            transition: 0.2s;
+        }
+        .contact-list a:hover {
+            color: #c084fc;
+            border-bottom-color: #c084fc;
+        }
+        .contact-text {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .invite-box {
+            flex: 1.2;
+            background: linear-gradient(145deg, #11141f 0%, #0b0e17 100%);
+            border-radius: 32px;
+            padding: 28px 24px;
+            border: 1px solid #322f4a;
+        }
+        .invite-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .invite-box p {
+            margin: 16px 0;
+            color: #cbd5e1;
+        }
+        .btn-idea {
+            background: #6d28d9;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-idea:hover {
+            background: #8b5cf6;
+            transform: scale(0.98);
+        }
+
+        footer {
+            border-top: 1px solid #1e2230;
+            padding: 32px 0;
+            text-align: center;
+            color: #6c7283;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 720px) {
+            .header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                flex-direction: column;
+            }
+        }
+        .highlight {
+            color: #c084fc;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <div class="logo" id="secretLogin">
-                <span>🛍️</span>
-                <h1>магазинчик Валинтины</h1>
-            </div>
-            <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Поиск товаров...">
-                <button onclick="searchProducts()">Найти</button>
-            </div>
-            <div class="filters">
-                <select id="categoryFilter" onchange="filterProducts()">
-                    <option value="">Все категории</option>
-                    <option value="Украшения">Украшения</option>
-                    <option value="Декор">Декор</option>
-                    <option value="Одежда">Одежда</option>
-                    <option value="Косметика">Косметика</option>
-                </select>
-            </div>
-        </div>
-    </header>
 
-    <main>
-        <div class="products-container" id="productsContainer">
-            <!-- Карточки товаров будут здесь -->
+<header>
+    <div class="container header-flex">
+        <div class="logo">
+            <h1>MAXSTUDIO</h1>
+            <p>инди-разработка · инновации · соул</p>
         </div>
-    </main>
-
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <h2>Вход в админ-панель</h2>
-            <input type="text" id="adminLogin" placeholder="Логин">
-            <input type="password" id="adminPassword" placeholder="Пароль">
-            <button onclick="checkAdminLogin()">Войти</button>
-            <span class="close" onclick="closeLoginModal()">&times;</span>
+        <div class="nav-links">
+            <a href="#projects">проекты</a>
+            <a href="#contacts">контакты</a>
+            <a href="#team">команда / идеи</a>
         </div>
     </div>
+</header>
 
-    <script src="script.js"></script>
-    <script>
-        // Инициализация клиентской части
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts(products);
-            setupSecretLogin();
+<main class="container">
+    <!-- О студии и Максимилиане -->
+    <section id="about">
+        <div style="background: radial-gradient(circle at 80% 20%, #141b2b, #090b10); border-radius: 48px; padding: 48px 36px; margin-top: 20px;">
+            <div style="max-width: 800px;">
+                <span style="background: #8b5cf622; padding: 6px 18px; border-radius: 60px; font-size: 0.8rem; font-weight: 500;">✧ Основатель ✧</span>
+                <h2 style="font-size: 2.8rem; margin: 20px 0 12px 0; font-weight: 800;">Максимилиан Зайцев</h2>
+                <p style="font-size: 1.1rem; color: #cbd5f0; line-height: 1.4;">Студия <span class="highlight">MaxStudio</span> — это пространство, где один человек создаёт смелые цифровые продукты. 
+                Максимилиан — fullstack-разработчик, архитектор и visionary. За плечами — коммерческие пет-проекты, 
+                opensource-решения и стремление объединять таланты. В каждом проекте — душа и передовые технологии.</p>
+                <div style="margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap;">
+                    <span style="background: #1e1f2c; border-radius: 30px; padding: 6px 18px;"><i class="fab fa-python"></i> Python эксперт</span>
+                    <span style="background: #1e1f2c; border-radius: 30px; padding: 6px 18px;"><i class="fab fa-react"></i> React / Next.js</span>
+                    <span style="background: #1e1f2c; border-radius: 30px; padding: 6px 18px;"><i class="fas fa-brain"></i> AI & Web3</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Проекты: maxnet, butterfly os, robochat -->
+    <section id="projects">
+        <h2 class="section-title">ключевые разработки</h2>
+        <div class="projects-grid">
+            <!-- maxnet -->
+            <div class="project-card">
+                <div class="project-icon"><i class="fab fa-python" style="color:#4B8BBE;"></i></div>
+                <h3>MAXNET</h3>
+                <div class="tech-badge"><i class="fab fa-python"></i> Python · сетевая утилита</div>
+                <p class="project-desc">Это моя собственная разработка. </p>
+                <p class="project-desc">Это можно сказать интернет 1.0 , скачайте и попробуйте!</p>
+                <a href="https://disk.yandex.ru/d/pxq6KBVqHWT0hQ" target="_blank" class="download-btn"><i class="fas fa-download"></i> Скачать MAXNET</a>
+            </div>
+            <!-- butterfly os -->
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-butterfly" style="color:#F5A9CB;"></i></div>
+                <h3>Butterfly OS</h3>
+                <div class="tech-badge"><i class="fab fa-python"></i> Python · окружение + лаунчер</div>
+                <p class="project-desc">это почти реальная операционная система.</p>
+                <p class="project-desc">этой прогрммой можно шутить над другом.</p>
+                <p class="project-desc">скачивайте и пробуйте!</p>
+                <a href="https://disk.yandex.ru/d/UgPDfNiQ0QGOLg" target="_blank" class="download-btn"><i class="fas fa-download"></i> Скачать Butterfly OS</a>
+            </div>
+            <!-- robochat (в разработке) -->
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-robot" style="color:#6EE7B7;"></i></div>
+                <h3>RoboChat</h3>
+                <div class="status-badge"><i class="fas fa-code-branch"></i> ВЕБ-ПРОЕКТ · в разработке</div>
+                <div class="tech-badge"><i class="fab fa-react"></i> Next.js · React · TypeScript</div>
+                <p class="project-desc">Умный чат-помощник с адаптивным дизайном, real-time возможностями и интеграцией AI-модулей. Современный стек: Next.js App Router, TypeScript. Уже реализована идея и пример дизайна.</p>
+                <span style="display: inline-block; background: #2a2a36; padding: 8px 14px; border-radius: 28px; font-size: 0.75rem; margin-top: 8px;"><i class="fas fa-spinner fa-pulse"></i> окончание проекта, не скоро.</span>
+            </div>
+        </div>
+        <div style="margin-top: 48px; background: #0b0e17; border-radius: 32px; padding: 28px; border-left: 5px solid #8b5cf6;">
+            <p style="font-size: 1rem;"><i class="fas fa-terminal"></i> <strong>Философия MaxStudio:</strong> Каждый проект — от идеи до реализации — несёт отпечаток индивидуального подхода. Python для надёжного бэкенда, а современный фронтенд для веб-революции.</p>
+        </div>
+    </section>
+
+    <!-- Контакты + вступление в команду, идеи -->
+    <section id="contacts">
+        <h2 class="section-title">контакты & сотрудничество</h2>
+        <div class="contact-grid">
+            <div class="contact-methods">
+                <h3><i class="fas fa-address-card"></i> Связаться с Максимилианом</h3>
+                <ul class="contact-list">
+                    <li><i class="fab fa-google"></i> <span class="contact-text">Gmail: <a href="mailto:z.max.evg@gmail.com">z.max.evg@gmail.com</a></span></li>
+                    <li><i class="fas fa-envelope"></i> <span class="contact-text">Mail.ru: <a href="mailto:z.max.evg@mail.ru">z.max.evg@mail.ru</a></span></li>
+                    <li><i class="fab fa-telegram-plane"></i> <span class="contact-text">Telegram: <a href="https://t.me/Maxjmilian" target="_blank">@Maxjmilian</a></span></li>
+                    <li><i class="fab fa-whatsapp"></i> <span class="contact-text">WhatsApp: <a href="https://wa.me/79809662514" target="_blank">+7 980 966-25-14</a></span></li>
+                    <li><i class="fas fa-phone-alt"></i> <span class="contact-text">Мобильный: <a href="tel:+79809662514">+7 980 966-25-14</a> (звонки, сообщения, сообщения в MAX.)</span></li>
+                </ul>
+                <div style="margin-top: 18px; font-size: 0.85rem; background: #161b26; border-radius: 20px; padding: 14px;">
+                    <i class="fas fa-clock"></i> Отвечаю в течение дня | Всегда открыт для обсуждения tech-задач
+                </div>
+            </div>
+            <div class="invite-box" id="team">
+                <h3><i class="fas fa-users"></i> В команду · для идей</h3>
+                <p>Ты — разработчик, дизайнер, энтузиаст? Хочешь повлиять на развитие <strong>RoboChat</strong> или новых продуктов? <br> MaxStudio ищет единомышленников для коллаборации. Предлагай фичи, присылай своё портфолио или просто делись идеей!</p>
+                <button id="ideaButton" class="btn-idea"><i class="fas fa-lightbulb"></i> Предложить идею / вступить</button>
+                <p style="margin-top: 20px; font-size: 0.8rem;"><i class="fas fa-code-branch"></i> Стек: Python, Next.js, React, TS, электрон, боты — приветствуются любые инициативы.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 MaxStudio — Максимилиан Зайцев. Все проекты созданы с любовью к коду. <br> MaxNET & Butterfly OS распространяются бесплатно.</p>
+        <div style="margin-top: 12px;">
+            <i class="fab fa-github"></i> · <i class="fab fa-python"></i> · <i class="fab fa-react"></i>
+        </div>
+    </div>
+</footer>
+
+<!-- скрипт для модального диалога / идеи (всплывающее сообщение) + копирование ссылок по клику? но главное - функционал для "предложить идею" -->
+<script>
+    (function() {
+        // кнопка предложить идею
+        const ideaBtn = document.getElementById('ideaButton');
+        if (ideaBtn) {
+            ideaBtn.addEventListener('click', function(e) {
+                const emailGmail = 'z.max.evg@gmail.com';
+                const telegram = 'https://t.me/Maxjmilian';
+                const mailru = 'z.max.evg@mail.ru';
+                // покажем красивое уведомление с выбором способа связи
+                const modalDiv = document.createElement('div');
+                modalDiv.style.position = 'fixed';
+                modalDiv.style.top = '0';
+                modalDiv.style.left = '0';
+                modalDiv.style.width = '100%';
+                modalDiv.style.height = '100%';
+                modalDiv.style.backgroundColor = 'rgba(0,0,0,0.8)';
+                modalDiv.style.backdropFilter = 'blur(6px)';
+                modalDiv.style.display = 'flex';
+                modalDiv.style.alignItems = 'center';
+                modalDiv.style.justifyContent = 'center';
+                modalDiv.style.zIndex = '1000';
+                modalDiv.style.fontFamily = "'Inter', sans-serif";
+
+                const inner = document.createElement('div');
+                inner.style.maxWidth = '480px';
+                inner.style.width = '90%';
+                inner.style.backgroundColor = '#121520';
+                inner.style.borderRadius = '32px';
+                inner.style.padding = '28px 24px';
+                inner.style.border = '1px solid #3a2e62';
+                inner.style.boxShadow = '0 25px 40px -12px black';
+                inner.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="font-size: 1.6rem; margin:0;"><i class="fas fa-paper-plane"></i> Поделиться идеей</h3>
+                        <button id="closeModalBtn" style="background:none; border:none; color:#aaa; font-size: 1.8rem; cursor:pointer;">&times;</button>
+                    </div>
+                    <p style="margin: 20px 0 12px 0; color: #cbd5e6;">Выберите удобный способ, чтобы связаться с Максимилианом и присоединиться к команде или предложить крутую фичу:</p>
+                    <div style="display: flex; flex-direction: column; gap: 14px; margin: 20px 0 10px;">
+                        <a href="mailto:z.max.evg@gmail.com?subject=Идея/Вступление%20в%20команду%20MaxStudio" style="background: #2c2a3c; border-radius: 50px; padding: 12px 18px; text-decoration: none; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-google" style="font-size: 1.4rem;"></i> Написать на Gmail (z.max.evg@gmail.com)
+                        </a>
+                        <a href="mailto:z.max.evg@mail.ru?subject=Коллаборация%20MaxStudio" style="background: #2c2a3c; border-radius: 50px; padding: 12px 18px; text-decoration: none; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-envelope"></i> Почта Mail.ru
+                        </a>
+                        <a href="https://t.me/Maxjmilian" target="_blank" style="background: #2c2a3c; border-radius: 50px; padding: 12px 18px; text-decoration: none; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-telegram"></i> Telegram — @Maxjmilian
+                        </a>
+                        <a href="https://wa.me/79809662514" target="_blank" style="background: #2c2a3c; border-radius: 50px; padding: 12px 18px; text-decoration: none; color: white; display: flex; align-items: center; gap: 12px;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp / +7 980 966-25-14
+                        </a>
+                    </div>
+                    <p style="font-size: 0.75rem; margin-top: 18px; border-top: 1px solid #2a2e3e; padding-top: 14px;">✨ Буду рад любым идеям, предложениям по улучшению RoboChat, MaxNET и новым проектам. Вместе сделаем крутые продукты!</p>
+                `;
+                modalDiv.appendChild(inner);
+                document.body.appendChild(modalDiv);
+
+                const closeBtn = inner.querySelector('#closeModalBtn');
+                const closeModal = () => modalDiv.remove();
+                closeBtn.addEventListener('click', closeModal);
+                modalDiv.addEventListener('click', (e) => {
+                    if (e.target === modalDiv) closeModal();
+                });
+            });
+        }
+
+        // добавим плавный скролл для навигации
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const hash = this.getAttribute('href');
+                if (hash && hash.startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = hash.substring(1);
+                    const targetElem = document.getElementById(targetId);
+                    if (targetElem) {
+                        targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (targetId === 'team') {
+                        const teamSection = document.getElementById('contacts');
+                        if(teamSection) teamSection.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                        const fallback = document.getElementById('contacts');
+                        if(fallback && targetId === 'contacts') fallback.scrollIntoView({behavior:'smooth'});
+                    }
+                }
+            });
         });
-    </script>
+
+        // легкая обработка для защиты контактов (телефон клик), предупреждение не требуется, просто ссылки.
+        // + можно добавить сообщение в консоль, что сайт портфолио готов.
+        console.log('MaxStudio portfolio | разработчик Максимилиан Зайцев');
+    })();
+</script>
 </body>
 </html>
